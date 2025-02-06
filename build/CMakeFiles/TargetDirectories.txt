@@ -1,0 +1,10 @@
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/RNA-tool_lib.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/RNA-tool_exe.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/package.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/package_source.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/edit_cache.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/rebuild_cache.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/list_install_components.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/install.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/install/local.dir
+/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/install/strip.dir

@@ -2,7 +2,7 @@
 #include <string>
 
 #include "lib.hpp"
-
+#include "chord.hpp"
 auto main() -> int
 {
   auto const lib = library {};

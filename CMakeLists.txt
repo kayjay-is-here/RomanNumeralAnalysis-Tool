@@ -31,6 +31,11 @@ target_compile_features(RNA-tool_lib PUBLIC cxx_std_17)
 find_package(fmt REQUIRED)
 target_link_libraries(RNA-tool_lib PRIVATE fmt::fmt)
 
+SET(TARGET_H
+    chord.hpp)
+
+SET(TARGET_SRC
+    chord.cpp)
 # ---- Declare executable ----
 
 add_executable(RNA-tool_exe source/main.cpp)

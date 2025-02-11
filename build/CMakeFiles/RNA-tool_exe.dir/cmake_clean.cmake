@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/RNA-tool_exe.dir/link.d"
+  "CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o"
+  "CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o.d"
   "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o"
   "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o.d"
   "RNA-tool"

@@ -207,6 +207,30 @@ RNA-tool_exe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/build
 .PHONY : RNA-tool_exe/fast
 
+source/chord.o: source/chord.cpp.o
+.PHONY : source/chord.o
+
+# target to build an object file
+source/chord.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o
+.PHONY : source/chord.cpp.o
+
+source/chord.i: source/chord.cpp.i
+.PHONY : source/chord.i
+
+# target to preprocess a source file
+source/chord.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.i
+.PHONY : source/chord.cpp.i
+
+source/chord.s: source/chord.cpp.s
+.PHONY : source/chord.s
+
+# target to generate assembly for a file
+source/chord.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.s
+.PHONY : source/chord.cpp.s
+
 source/lib.o: source/lib.cpp.o
 .PHONY : source/lib.o
 
@@ -271,6 +295,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... RNA-tool_exe"
 	@echo "... RNA-tool_lib"
+	@echo "... source/chord.o"
+	@echo "... source/chord.i"
+	@echo "... source/chord.s"
 	@echo "... source/lib.o"
 	@echo "... source/lib.i"
 	@echo "... source/lib.s"

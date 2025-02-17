@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/shadu/Documents/Coding Projects/RNA-tool"
+CMAKE_SOURCE_DIR = /home/shadu/Documents/projects/personal/RNA-tools
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/shadu/Documents/Coding Projects/RNA-tool/build"
+CMAKE_BINARY_DIR = /home/shadu/Documents/projects/personal/RNA-tools/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/RNA-tool_exe.dir/depend.make
@@ -73,50 +73,38 @@ CMakeFiles/RNA-tool_exe.dir/codegen:
 .PHONY : CMakeFiles/RNA-tool_exe.dir/codegen
 
 CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o: CMakeFiles/RNA-tool_exe.dir/flags.make
-CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o: /home/shadu/Documents/Coding\ Projects/RNA-tool/source/main.cpp
+CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o: /home/shadu/Documents/projects/personal/RNA-tools/source/main.cpp
 CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o: CMakeFiles/RNA-tool_exe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o -MF CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o.d -o CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o -c "/home/shadu/Documents/Coding Projects/RNA-tool/source/main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o -MF CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o.d -o CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o -c /home/shadu/Documents/projects/personal/RNA-tools/source/main.cpp
 
 CMakeFiles/RNA-tool_exe.dir/source/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/RNA-tool_exe.dir/source/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/shadu/Documents/Coding Projects/RNA-tool/source/main.cpp" > CMakeFiles/RNA-tool_exe.dir/source/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shadu/Documents/projects/personal/RNA-tools/source/main.cpp > CMakeFiles/RNA-tool_exe.dir/source/main.cpp.i
 
 CMakeFiles/RNA-tool_exe.dir/source/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RNA-tool_exe.dir/source/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/shadu/Documents/Coding Projects/RNA-tool/source/main.cpp" -o CMakeFiles/RNA-tool_exe.dir/source/main.cpp.s
-
-CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o: CMakeFiles/RNA-tool_exe.dir/flags.make
-CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o: /home/shadu/Documents/Coding\ Projects/RNA-tool/source/chord.cpp
-CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o: CMakeFiles/RNA-tool_exe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o -MF CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o.d -o CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o -c "/home/shadu/Documents/Coding Projects/RNA-tool/source/chord.cpp"
-
-CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/shadu/Documents/Coding Projects/RNA-tool/source/chord.cpp" > CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.i
-
-CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/shadu/Documents/Coding Projects/RNA-tool/source/chord.cpp" -o CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shadu/Documents/projects/personal/RNA-tools/source/main.cpp -o CMakeFiles/RNA-tool_exe.dir/source/main.cpp.s
 
 # Object files for target RNA-tool_exe
 RNA__tool_exe_OBJECTS = \
-"CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o" \
-"CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o"
+"CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o"
 
 # External object files for target RNA-tool_exe
 RNA__tool_exe_EXTERNAL_OBJECTS = \
-"/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o"
+"/home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o" \
+"/home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o" \
+"/home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.o"
 
 RNA-tool: CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o
-RNA-tool: CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o
 RNA-tool: CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o
+RNA-tool: CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o
+RNA-tool: CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.o
 RNA-tool: CMakeFiles/RNA-tool_exe.dir/build.make
 RNA-tool: CMakeFiles/RNA-tool_exe.dir/compiler_depend.ts
 RNA-tool: /usr/lib/libfmt.so.11.1.3
 RNA-tool: CMakeFiles/RNA-tool_exe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable RNA-tool"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable RNA-tool"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RNA-tool_exe.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -128,6 +116,6 @@ CMakeFiles/RNA-tool_exe.dir/clean:
 .PHONY : CMakeFiles/RNA-tool_exe.dir/clean
 
 CMakeFiles/RNA-tool_exe.dir/depend:
-	cd "/home/shadu/Documents/Coding Projects/RNA-tool/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/shadu/Documents/Coding Projects/RNA-tool" "/home/shadu/Documents/Coding Projects/RNA-tool" "/home/shadu/Documents/Coding Projects/RNA-tool/build" "/home/shadu/Documents/Coding Projects/RNA-tool/build" "/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles/RNA-tool_exe.dir/DependInfo.cmake" "--color=$(COLOR)"
+	cd /home/shadu/Documents/projects/personal/RNA-tools/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shadu/Documents/projects/personal/RNA-tools /home/shadu/Documents/projects/personal/RNA-tools /home/shadu/Documents/projects/personal/RNA-tools/build /home/shadu/Documents/projects/personal/RNA-tools/build /home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles/RNA-tool_exe.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/RNA-tool_exe.dir/depend
 

@@ -18,6 +18,8 @@ include(cmake/variables.cmake)
 add_library(
     RNA-tool_lib OBJECT
     source/lib.cpp
+    source/chord.cpp
+    source/chordProgression.cpp
 )
 
 target_include_directories(
@@ -32,10 +34,10 @@ find_package(fmt REQUIRED)
 target_link_libraries(RNA-tool_lib PRIVATE fmt::fmt)
 
 SET(TARGET_H
-    chord.hpp)
+    chord.hpp chordProgression.hpp)
 
 SET(TARGET_SRC
-    chord.cpp)
+    chord.cpp chordProgression.cpp)
 # ---- Declare executable ----
 
 add_executable(RNA-tool_exe source/main.cpp)
@@ -64,4 +66,6 @@ elseif(NOT PROJECT_IS_TOP_LEVEL)
   )
 endif()
 
-include(cmake/dev-mode.cmake)
+
+
+

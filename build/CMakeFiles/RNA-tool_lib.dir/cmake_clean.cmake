@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o"
+  "CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o.d"
+  "CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.o"
+  "CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.o.d"
   "CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o"
   "CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o.d"
 )

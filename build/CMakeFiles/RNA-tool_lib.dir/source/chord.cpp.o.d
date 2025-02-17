@@ -1,4 +1,4 @@
-CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o: \
+CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o: \
  /home/shadu/Documents/projects/personal/RNA-tools/source/chord.cpp \
  /usr/include/stdc-predef.h \
  /home/shadu/Documents/projects/personal/RNA-tools/source/chord.hpp \

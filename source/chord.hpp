@@ -1,8 +1,11 @@
-// chord.hpp
 #ifndef CHORD_H
 #define CHORD_H
-#include <string>
 
+#include <string>
+#include <stdexcept>
+#include <iostream>
+
+// Define the 12 pitch classes (using 1-indexing for clarity)
 enum Note {
     C = 1,
     Cs = 2,
@@ -18,8 +21,8 @@ enum Note {
     B = 12
 };
 
-enum Quality
-{
+// Define chord qualities
+enum Quality {
     Major = 0,
     Minor = 1,
     Diminished = 2,
@@ -27,19 +30,52 @@ enum Quality
     HalfDiminished = 4
 };
 
-// Maps enharmonic notes using an unordered map 
+// Conversion function declarations
 Note stringToNote(const std::string &s);
+std::string noteToString(Note note);
+std::string qualityToString(Quality quality);
+Quality stringToQuality(const std::string &s);
 
-class Chord 
-{
+// Chord class declaration
+class Chord {
+private:
     Note rootNote;
     Quality quality;
-    std::string Extension; // TODO actually figure out how this works
+    std::string extension; // e.g., "7", "9", etc.
 
-    Chord(); // This should throw an error actually since I don't want a chord with nothing set to it 
+public:
+    // Delete the default constructor to prevent uninitialized chords.
+    Chord() = delete;
+
+    // Constructors
     Chord(Note rootNote);
     Chord(Note rootNote, Quality quality);
-    Chord(Note rootNote, Quality quality, std::string extension);
+    Chord(Note rootNote, Quality quality, const std::string &extension);
 
+    // Getters
+    Note getRootNote() const;
+    Quality getQuality() const;
+    std::string getExtension() const;
+
+    // Setters
+    void setRootNote(Note note);
+    void setQuality(Quality q);
+    void setExtension(const std::string &ext);
+
+    // Transpose the chord by a given number of semitones.
+    Chord transpose(int semitones) const;
+
+    // Return the chord as a string (e.g., "C#m7", "Gdim", "Faug7", "Am").
+    std::string toString() const;
+
+    // Parse a chord from a string.
+    // Expected format: [Note][Quality][Extension]
+    // Examples: "C#m7", "Gdim", "Faug7", "Am"
+    static Chord fromString(const std::string &chordStr);
+
+    // Overload the stream insertion operator for printing.
+    friend std::ostream &operator<<(std::ostream &os, const Chord &chord);
 };
-#endif
+
+#endif // CHORD_H
+

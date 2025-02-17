@@ -7,13 +7,13 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/shadu/Documents/Coding Projects/RNA-tool/CMakeLists.txt"
+  "/home/shadu/Documents/projects/personal/RNA-tools/CMakeLists.txt"
   "CMakeFiles/3.31.5/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.31.5/CMakeSystem.cmake"
-  "/home/shadu/Documents/Coding Projects/RNA-tool/cmake/install-rules.cmake"
-  "/home/shadu/Documents/Coding Projects/RNA-tool/cmake/prelude.cmake"
-  "/home/shadu/Documents/Coding Projects/RNA-tool/cmake/project-is-top-level.cmake"
-  "/home/shadu/Documents/Coding Projects/RNA-tool/cmake/variables.cmake"
+  "/home/shadu/Documents/projects/personal/RNA-tools/cmake/install-rules.cmake"
+  "/home/shadu/Documents/projects/personal/RNA-tools/cmake/prelude.cmake"
+  "/home/shadu/Documents/projects/personal/RNA-tools/cmake/project-is-top-level.cmake"
+  "/home/shadu/Documents/projects/personal/RNA-tools/cmake/variables.cmake"
   "/usr/lib/cmake/fmt/fmt-config-version.cmake"
   "/usr/lib/cmake/fmt/fmt-config.cmake"
   "/usr/lib/cmake/fmt/fmt-targets-none.cmake"

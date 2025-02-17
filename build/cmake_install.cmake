@@ -1,4 +1,4 @@
-# Install script for directory: /home/shadu/Documents/Coding Projects/RNA-tool
+# Install script for directory: /home/shadu/Documents/projects/personal/RNA-tools
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -49,7 +49,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "RNA-tool_Runtime" OR NOT CMAKE_INSTALL_COMP
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/RNA-tool"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/shadu/Documents/Coding Projects/RNA-tool/build/RNA-tool")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/shadu/Documents/projects/personal/RNA-tools/build/RNA-tool")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/RNA-tool" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/RNA-tool")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -61,7 +61,7 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/shadu/Documents/Coding Projects/RNA-tool/build/install_local_manifest.txt"
+  file(WRITE "/home/shadu/Documents/projects/personal/RNA-tools/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -77,6 +77,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/shadu/Documents/Coding Projects/RNA-tool/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/home/shadu/Documents/projects/personal/RNA-tools/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/shadu/Documents/Coding Projects/RNA-tool"
+CMAKE_SOURCE_DIR = /home/shadu/Documents/projects/personal/RNA-tools
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/shadu/Documents/Coding Projects/RNA-tool/build"
+CMAKE_BINARY_DIR = /home/shadu/Documents/projects/personal/RNA-tools/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/shadu/Documents/Coding\ Projects/RNA-tool/build/CPackSourceConfig.cmake
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/shadu/Documents/projects/personal/RNA-tools/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -152,9 +152,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles" "/home/shadu/Documents/Coding Projects/RNA-tool/build//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles /home/shadu/Documents/projects/personal/RNA-tools/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/shadu/Documents/Coding Projects/RNA-tool/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shadu/Documents/projects/personal/RNA-tools/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -212,7 +212,7 @@ source/chord.o: source/chord.cpp.o
 
 # target to build an object file
 source/chord.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_lib.dir/build.make CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o
 .PHONY : source/chord.cpp.o
 
 source/chord.i: source/chord.cpp.i
@@ -220,7 +220,7 @@ source/chord.i: source/chord.cpp.i
 
 # target to preprocess a source file
 source/chord.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_lib.dir/build.make CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.i
 .PHONY : source/chord.cpp.i
 
 source/chord.s: source/chord.cpp.s
@@ -228,8 +228,32 @@ source/chord.s: source/chord.cpp.s
 
 # target to generate assembly for a file
 source/chord.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_exe.dir/build.make CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_lib.dir/build.make CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.s
 .PHONY : source/chord.cpp.s
+
+source/chordProgression.o: source/chordProgression.cpp.o
+.PHONY : source/chordProgression.o
+
+# target to build an object file
+source/chordProgression.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_lib.dir/build.make CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.o
+.PHONY : source/chordProgression.cpp.o
+
+source/chordProgression.i: source/chordProgression.cpp.i
+.PHONY : source/chordProgression.i
+
+# target to preprocess a source file
+source/chordProgression.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_lib.dir/build.make CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.i
+.PHONY : source/chordProgression.cpp.i
+
+source/chordProgression.s: source/chordProgression.cpp.s
+.PHONY : source/chordProgression.s
+
+# target to generate assembly for a file
+source/chordProgression.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RNA-tool_lib.dir/build.make CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.s
+.PHONY : source/chordProgression.cpp.s
 
 source/lib.o: source/lib.cpp.o
 .PHONY : source/lib.o
@@ -298,6 +322,9 @@ help:
 	@echo "... source/chord.o"
 	@echo "... source/chord.i"
 	@echo "... source/chord.s"
+	@echo "... source/chordProgression.o"
+	@echo "... source/chordProgression.i"
+	@echo "... source/chordProgression.s"
 	@echo "... source/lib.o"
 	@echo "... source/lib.i"
 	@echo "... source/lib.s"

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DFMT_SHARED
 
-CXX_INCLUDES = -I"/home/shadu/Documents/Coding Projects/RNA-tool/source"
+CXX_INCLUDES = -I/home/shadu/Documents/projects/personal/RNA-tools/source
 
 CXX_FLAGS = 
 

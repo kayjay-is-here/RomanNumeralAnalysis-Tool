@@ -1,7 +1,7 @@
 CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o: \
- /home/shadu/Documents/Coding\ Projects/RNA-tool/source/lib.cpp \
+ /home/shadu/Documents/projects/personal/RNA-tools/source/lib.cpp \
  /usr/include/stdc-predef.h \
- /home/shadu/Documents/Coding\ Projects/RNA-tool/source/lib.hpp \
+ /home/shadu/Documents/projects/personal/RNA-tools/source/lib.hpp \
  /usr/include/c++/14.2.1/string \
  /usr/include/c++/14.2.1/bits/requires_hosted.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h \

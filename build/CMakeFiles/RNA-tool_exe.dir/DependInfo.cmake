@@ -8,8 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/shadu/Documents/Coding Projects/RNA-tool/source/chord.cpp" "CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o" "gcc" "CMakeFiles/RNA-tool_exe.dir/source/chord.cpp.o.d"
-  "/home/shadu/Documents/Coding Projects/RNA-tool/source/main.cpp" "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o" "gcc" "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o.d"
+  "/home/shadu/Documents/projects/personal/RNA-tools/source/main.cpp" "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o" "gcc" "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o.d"
   "" "RNA-tool" "gcc" "CMakeFiles/RNA-tool_exe.dir/link.d"
   )
 

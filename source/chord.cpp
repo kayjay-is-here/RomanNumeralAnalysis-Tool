@@ -1,4 +1,5 @@
 #include "chord.hpp"
+#include <algorithm>
 #include <unordered_map>
 #include <stdexcept>
 #include <iostream>
@@ -26,7 +27,7 @@ Note stringToNote(const std::string &s) {
     throw std::invalid_argument("Invalid note: " + s);
 }
 
-// Convert a Note enum to its canonical string representation.
+// Convert a Note enum to its canonical string representation
 std::string noteToString(Note note) {
     switch (note) {
         case C:  return "C";
@@ -45,7 +46,16 @@ std::string noteToString(Note note) {
     }
 }
 
-// Convert a Quality enum to its string suffix for chord notation.
+Note transpose(Note note, int semitones) {
+    int newVal = (static_cast<int>(note) - 1 + semitones) % 12;
+    if(newVal < 0)
+        newVal += 12;
+    
+    newVal += 1;
+    return static_cast<Note>(newVal);
+}
+
+// Convert a Quality enum to its string suffix for chord notation
 std::string qualityToString(Quality quality) {
     switch (quality) {
         case Major:          return "";
@@ -57,7 +67,7 @@ std::string qualityToString(Quality quality) {
     }
 }
 
-// Convert a string to a Quality enum.
+// Convert a string to a Quality enum
 Quality stringToQuality(const std::string &s) {
     if (s == "maj" || s == "M" || s == "")
         return Major;
@@ -73,7 +83,6 @@ Quality stringToQuality(const std::string &s) {
         throw std::invalid_argument("Invalid quality: " + s);
 }
 
-// --- Chord Class Implementations ---
 
 // Constructor with only root note (defaults to Major)
 Chord::Chord(Note rootNote)
@@ -87,7 +96,6 @@ Chord::Chord(Note rootNote, Quality quality)
 Chord::Chord(Note rootNote, Quality quality, const std::string &extension)
     : rootNote(rootNote), quality(quality), extension(extension) { }
 
-// Getters
 Note Chord::getRootNote() const {
     return rootNote;
 }
@@ -100,7 +108,6 @@ std::string Chord::getExtension() const {
     return extension;
 }
 
-// Setters
 void Chord::setRootNote(Note note) {
     rootNote = note;
 }
@@ -115,15 +122,15 @@ void Chord::setExtension(const std::string &ext) {
 
 // Transpose the chord by a given number of semitones.
 Chord Chord::transpose(int semitones) const {
-    // Convert to 0-based index for modulo arithmetic.
     int newNoteVal = static_cast<int>(rootNote) - 1;
     newNoteVal = (newNoteVal + semitones) % 12;
     if (newNoteVal < 0)
         newNoteVal += 12;
-    newNoteVal += 1; // Convert back to 1-based.
+    newNoteVal += 1;
     Note newRoot = static_cast<Note>(newNoteVal);
     return Chord(newRoot, quality, extension);
 }
+
 
 // Return the chord as a string (e.g., "C#m7", "Gdim", etc.)
 std::string Chord::toString() const {
@@ -173,7 +180,6 @@ Chord Chord::fromString(const std::string &chordStr) {
     return Chord(root, qual, ext);
 }
 
-// Overload the stream insertion operator for printing chords.
 std::ostream &operator<<(std::ostream &os, const Chord &chord) {
     os << chord.toString();
     return os;

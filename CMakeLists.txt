@@ -14,9 +14,9 @@ include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
 # ---- Declare library ----
-
+# Using a STATIC library to allow linking in both the main executable and tests.
 add_library(
-    RNA-tool_lib OBJECT
+    RNA-tool_lib STATIC
     source/chord.cpp
     source/chordProgression.cpp
 )
@@ -24,7 +24,7 @@ add_library(
 target_include_directories(
     RNA-tool_lib ${warning_guard}
     PUBLIC
-    "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
+    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
 target_compile_features(RNA-tool_lib PUBLIC cxx_std_17)
@@ -34,6 +34,7 @@ SET(TARGET_H
 
 SET(TARGET_SRC
     chord.cpp chordProgression.cpp)
+
 # ---- Declare executable ----
 
 add_executable(RNA-tool_exe source/main.cpp)
@@ -61,7 +62,4 @@ elseif(NOT PROJECT_IS_TOP_LEVEL)
       "Developer mode is intended for developers of RNA-tool"
   )
 endif()
-
-
-
 

@@ -21,13 +21,12 @@ public:
     void removeChordAt(size_t index);
     std::vector<Chord> getChords() const;
 
-    // Transpose the entire progression by a given number of semitones.
+    // Transpose the entire progression by a given number of semitones
     ChordProgression transpose(int semitones) const;
 
-    // Convert the progression to roman numeral analysis relative to the given key (assumed major).
+    // Convert the progression to roman numeral analysis relative to the given key (assumed major)
     std::string toRomanNumerals(Note key) const;
 
-    // Overloaded stream insertion operator for printing.
     friend std::ostream &operator<<(std::ostream &os, const ChordProgression &cp);
 };
 

@@ -2,88 +2,125 @@
 #include <sstream>
 #include <stdexcept>
 #include <cctype>
+#include <unordered_map>
 
-// --- Constructors ---
+// Helper function to convert a semitone difference (0..11) into a pair of Roman numeral strings
+static std::pair<std::string, std::string> getRomanNumeralBase(int diff) {
+    switch (diff) {
+        case 0:  return { "I",   "i"   };
+        case 1:  return { "#I",  "bII" };
+        case 2:  return { "II",  "ii"  };
+        case 3:  return { "#II", "bIII"};
+        case 4:  return { "III", "iii" };
+        case 5:  return { "IV",  "iv"  };
+        case 6:  return { "#IV", "bV"  };
+        case 7:  return { "V",   "v"   };
+        case 8:  return { "#V",  "bVI" };
+        case 9:  return { "VI",  "vi"  };
+        case 10: return { "#VI", "bVII"};
+        case 11: return { "VII", "vii" };
+        default:
+            return { "?", "?" };
+    }
+}
+
+// Determine default chord quality from roman numeral case
+static Quality defaultQualityFromRoman(const std::string &numeral) {
+    for (char c : numeral) {
+        if (std::isalpha(static_cast<unsigned char>(c))) {
+            if (std::isupper(static_cast<unsigned char>(c)))
+                return Major;
+            else
+                return Minor;
+        }
+    }
+    return Major;
+}
+
+// Convert the core roman numeral (without accidentals or modifiers) to its semitone offset
+static int offsetFromBaseRoman(const std::string &romanNoAccidentals) {
+    std::string upper;
+    for (char c : romanNoAccidentals)
+        upper.push_back(std::toupper(static_cast<unsigned char>(c)));
+    if      (upper == "I"   || upper == "I+"   || upper == "I°"   || upper == "IØ")    return 0;
+    else if (upper == "II"  || upper == "II+"  || upper == "II°"  || upper == "IIØ")   return 2;
+    else if (upper == "III" || upper == "III+" || upper == "III°" || upper == "IIIØ")  return 4;
+    else if (upper == "IV"  || upper == "IV+"  || upper == "IV°"  || upper == "IVØ")   return 5;
+    else if (upper == "V"   || upper == "V+"   || upper == "V°"   || upper == "VØ")    return 7;
+    else if (upper == "VI"  || upper == "VI+"  || upper == "VI°"  || upper == "VIØ")   return 9;
+    else if (upper == "VII" || upper == "VII+" || upper == "VII°" || upper == "VIIØ")  return 11;
+    if      (upper == "I")   return 0;
+    else if (upper == "II")  return 2;
+    else if (upper == "III") return 4;
+    else if (upper == "IV")  return 5;
+    else if (upper == "V")   return 7;
+    else if (upper == "VI")  return 9;
+    else if (upper == "VII") return 11;
+    throw std::invalid_argument("Invalid base Roman numeral: " + romanNoAccidentals);
+}
+
+// Parse a single roman numeral string into a Chord
+static Chord parseRomanChord(const std::string &romanStr, Note key) {
+    int accidental = 0;
+    size_t pos = 0;
+    while (pos < romanStr.size()) {
+        if (romanStr[pos] == 'b') {
+            accidental -= 1;
+            pos++;
+        } else if (romanStr[pos] == '#') {
+            accidental += 1;
+            pos++;
+        } else {
+            break;
+        }
+    }
+    std::string core;
+    while (pos < romanStr.size()) {
+        char c = romanStr[pos];
+        if (c == '+' || c == '°' || c == 'ø')
+            break;
+        core.push_back(c);
+        pos++;
+    }
+    if (core.empty())
+        throw std::invalid_argument("Invalid or missing core Roman numeral in: " + romanStr);
+    Quality qual = defaultQualityFromRoman(core);
+    if (pos < romanStr.size()) {
+        char mod = romanStr[pos];
+        if (mod == '+') {
+            qual = Augmented;
+            pos++;
+        } else if (mod == '°') {
+            qual = Diminished;
+            pos++;
+        } else if (mod == 'ø') {
+            qual = HalfDiminished;
+            pos++;
+        }
+    }
+    std::string extension;
+    if (pos < romanStr.size())
+        extension = romanStr.substr(pos);
+    int baseOffset = offsetFromBaseRoman(core);
+    int finalOffset = baseOffset + accidental;
+    finalOffset = ((finalOffset % 12) + 12) % 12;
+    int keyVal = static_cast<int>(key);
+    int newVal = ((keyVal - 1 + finalOffset) % 12 + 12) % 12 + 1;
+    Note newRoot = static_cast<Note>(newVal);
+    return Chord(newRoot, qual, extension);
+}
+
 ChordProgression::ChordProgression() : chords() { }
 
 ChordProgression::ChordProgression(const std::vector<Chord>& chords)
     : chords(chords) { }
 
-// This constructor builds a chord progression from a list of roman numeral strings and a key.
 ChordProgression::ChordProgression(const std::vector<std::string>& romanNumerals, Note key) {
-    // For each roman numeral string, convert it into a Chord relative to the given key.
-    for (const auto &roman : romanNumerals) {
-        // Use the helper function defined below.
-        // If conversion fails, an exception will be thrown.
-        auto chord = [] (const std::string &romanStr, Note key) -> Chord {
-            // Define a helper struct for roman numeral mapping.
-            struct RomanMapping {
-                std::string numeral;
-                int offset; // semitone offset from key (0-based)
-                Quality defaultQuality;
-            };
-            // The order is chosen from longest to shortest to avoid premature matches.
-            const std::vector<RomanMapping> romanMappings = {
-                { "vii", 11, Diminished },
-                { "iii", 4, Minor },
-                { "ii", 2, Minor },
-                { "vi", 9, Minor },
-                { "IV", 5, Major },
-                { "V", 7, Major },
-                { "I", 0, Major }
-            };
-
-            // Attempt to match one of the known roman numeral digits.
-            RomanMapping mapping;
-            bool found = false;
-            size_t numeralLength = 0;
-            for (const auto &rm : romanMappings) {
-                if (romanStr.size() >= rm.numeral.size() &&
-                    romanStr.compare(0, rm.numeral.size(), rm.numeral) == 0) {
-                    mapping = rm;
-                    numeralLength = rm.numeral.size();
-                    found = true;
-                    break;
-                }
-            }
-            if (!found)
-                throw std::invalid_argument("Invalid roman numeral: " + romanStr);
-
-            // Determine chord quality. Start with the default.
-            Quality qual = mapping.defaultQuality;
-            size_t pos = numeralLength;
-
-            // Check if a quality modifier is present.
-            // Allowed modifiers: '+' for Augmented, '°' for Diminished, 'ø' for HalfDiminished.
-            if (pos < romanStr.size()) {
-                char mod = romanStr[pos];
-                if (mod == '+') {
-                    qual = Augmented;
-                    pos++;
-                } else if (mod == '°') {
-                    qual = Diminished;
-                    pos++;
-                } else if (mod == 'ø') {
-                    qual = HalfDiminished;
-                    pos++;
-                }
-            }
-            // Whatever remains is treated as an extension.
-            std::string ext = (pos < romanStr.size()) ? romanStr.substr(pos) : "";
-
-            // Compute the root note relative to the key.
-            // Our Note enum is 1-indexed.
-            int keyVal = static_cast<int>(key);
-            int newVal = ((keyVal - 1 + mapping.offset) % 12 + 12) % 12 + 1;
-            Note newRoot = static_cast<Note>(newVal);
-
-            return Chord(newRoot, qual, ext);
-        }(roman, key);
-        chords.push_back(chord);
-    }
+    chords.reserve(romanNumerals.size());
+    for (const auto& rn : romanNumerals)
+        chords.push_back(parseRomanChord(rn, key));
 }
 
-// --- Manipulation Methods ---
 void ChordProgression::addChord(const Chord &chord) {
     chords.push_back(chord);
 }
@@ -98,116 +135,46 @@ std::vector<Chord> ChordProgression::getChords() const {
     return chords;
 }
 
-// --- Transposition ---
 ChordProgression ChordProgression::transpose(int semitones) const {
     std::vector<Chord> transposed;
-    for (const auto &chord : chords) {
+    transposed.reserve(chords.size());
+    for (const auto &chord : chords)
         transposed.push_back(chord.transpose(semitones));
-    }
     return ChordProgression(transposed);
 }
 
-// --- Roman Numeral Analysis (Chord to Roman) ---
-//
-// This helper function converts a single chord to its roman numeral
-// representation relative to a given key (assumed major). For chords whose
-// root is not diatonic (i.e. not at intervals 0,2,4,5,7,9,11 from the key),
-// a marker ("?") is prepended.
 static std::string chordToRoman(const Chord &chord, Note key) {
-    // Calculate the interval (in semitones) from the key.
     int diff = ((int)chord.getRootNote() - (int)key + 12) % 12;
-    std::string ext = chord.getExtension();
-    
-    switch(diff) {
-        case 0: // I
-            if(chord.getQuality() == Major)
-                return "I" + ext;
-            else if(chord.getQuality() == Minor)
-                return "i" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "I+" + ext;
-            else if(chord.getQuality() == Diminished)
-                return "i°" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "iø" + ext;
+    auto [uppercaseRN, lowercaseRN] = getRomanNumeralBase(diff);
+    bool isUpper = false;
+    switch (chord.getQuality()) {
+        case Major:
+        case Augmented:
+            isUpper = true;
             break;
-        case 2: // ii
-            if(chord.getQuality() == Minor)
-                return "ii" + ext;
-            else if(chord.getQuality() == Major)
-                return "II" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "ii+" + ext;
-            else if(chord.getQuality() == Diminished)
-                return "ii°" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "iiø" + ext;
+        case Minor:
+        case Diminished:
+        case HalfDiminished:
+            isUpper = false;
             break;
-        case 4: // iii
-            if(chord.getQuality() == Minor)
-                return "iii" + ext;
-            else if(chord.getQuality() == Major)
-                return "III" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "iii+" + ext;
-            else if(chord.getQuality() == Diminished)
-                return "iii°" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "iiiø" + ext;
+    }
+    std::string label = (isUpper ? uppercaseRN : lowercaseRN);
+    switch (chord.getQuality()) {
+        case Augmented:
+            label += "+";
             break;
-        case 5: // IV
-            if(chord.getQuality() == Major)
-                return "IV" + ext;
-            else if(chord.getQuality() == Minor)
-                return "iv" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "IV+" + ext;
-            else if(chord.getQuality() == Diminished)
-                return "iv°" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "ivø" + ext;
+        case Diminished:
+            label += "°";
             break;
-        case 7: // V
-            if(chord.getQuality() == Major)
-                return "V" + ext;
-            else if(chord.getQuality() == Minor)
-                return "v" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "V+" + ext;
-            else if(chord.getQuality() == Diminished)
-                return "v°" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "vø" + ext;
-            break;
-        case 9: // vi
-            if(chord.getQuality() == Minor)
-                return "vi" + ext;
-            else if(chord.getQuality() == Major)
-                return "VI" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "vi+" + ext;
-            else if(chord.getQuality() == Diminished)
-                return "vi°" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "viø" + ext;
-            break;
-        case 11: // vii
-            if(chord.getQuality() == Diminished)
-                return "vii°" + ext;
-            else if(chord.getQuality() == Minor)
-                return "vii" + ext;
-            else if(chord.getQuality() == Major)
-                return "VII" + ext;
-            else if(chord.getQuality() == Augmented)
-                return "vii+" + ext;
-            else if(chord.getQuality() == HalfDiminished)
-                return "viiø" + ext;
+        case HalfDiminished:
+            label += "ø";
             break;
         default:
             break;
     }
-    // For non-diatonic chords (or unmatched qualities), prepend a marker.
-    return "?" + chord.toString();
+    if (!chord.getExtension().empty())
+        label += chord.getExtension();
+    return label;
 }
 
 std::string ChordProgression::toRomanNumerals(Note key) const {
@@ -220,13 +187,10 @@ std::string ChordProgression::toRomanNumerals(Note key) const {
     return oss.str();
 }
 
-// --- Overloaded Stream Insertion Operator ---
 std::ostream &operator<<(std::ostream &os, const ChordProgression &cp) {
     os << "[ ";
-    for (const auto &chord : cp.chords) {
+    for (const auto &chord : cp.chords)
         os << chord << " ";
-    }
     os << "]";
     return os;
 }
-

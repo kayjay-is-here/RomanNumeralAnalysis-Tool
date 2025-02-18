@@ -6,7 +6,6 @@
 #include "chord.hpp"
 #include "chordProgression.hpp"
 
-// Helper function: split a string by whitespace into tokens.
 std::vector<std::string> split(const std::string &s) {
     std::istringstream iss(s);
     std::vector<std::string> tokens;
@@ -16,17 +15,6 @@ std::vector<std::string> split(const std::string &s) {
     return tokens;
 }
 
-// Helper function: transpose a key by a given number of semitones.
-// Our Note enum is 1-indexed.
-Note transposeKey(Note key, int semitones) {
-    int newVal = (static_cast<int>(key) - 1 + semitones) % 12;
-    if (newVal < 0)
-        newVal += 12;
-    newVal += 1;
-    return static_cast<Note>(newVal);
-}
-
-// Read an integer from user input.
 int readInteger() {
     int num;
     while (!(std::cin >> num)) {
@@ -46,7 +34,7 @@ int main() {
     Note originalKey, currentKey;
     bool usingRomanInput = false; // true if user initially entered roman numeral tokens
 
-    // Outer loop: input new progression or exit.
+    // Outer loop: input new progression or exit
     while (true) {
         std::cout << "\nEnter input type ('roman' for roman numeral progression or 'chords' for chord progression), or 'exit' to quit: ";
         std::string inputType;
@@ -60,7 +48,7 @@ int main() {
         }
         usingRomanInput = (inputType == "roman");
 
-        // Ask for key.
+        // Ask for key
         std::cout << "Enter key (e.g., C, C#, Db, etc.): ";
         std::string keyStr;
         std::getline(std::cin, keyStr);
@@ -74,11 +62,11 @@ int main() {
         originalKey = key;
         currentKey = key;
 
-        // Ask for progression.
+        // Ask for progression
         if (usingRomanInput)
             std::cout << "Enter roman numeral progression (space-separated, e.g., I vi IV V): ";
         else
-            std::cout << "Enter chord progression (space-separated, e.g., C Am F G or C#m7 Gdim ...): ";
+            std::cout << "Enter chord progression (space-separated, case sensitive, e.g., Cmaj7 Am7 Gdim ...): ";
 
         std::string progLine;
         std::getline(std::cin, progLine);
@@ -90,10 +78,10 @@ int main() {
 
         try {
             if (usingRomanInput) {
-                // Create progression using roman numeral constructor.
+                // Create progression using roman numeral constructor
                 originalProg = ChordProgression(tokens, key);
             } else {
-                // For chords, convert each token into a Chord using Chord::fromString.
+                // For chords, convert each token into a Chord using Chord::fromString
                 std::vector<Chord> chordList;
                 for (const auto &tok : tokens) {
                     chordList.push_back(Chord::fromString(tok));
@@ -104,7 +92,7 @@ int main() {
             std::cout << "Error creating progression: " << e.what() << "\n";
             continue;
         }
-        // Set current progression to original.
+        // Set current progression to original
         currentProg = originalProg;
 
         std::cout << "\n--- Progression Loaded ---\n";
@@ -120,7 +108,7 @@ int main() {
                       << originalProg.toRomanNumerals(key) << "\n";
         }
 
-        // Inner loop: operations on the current progression.
+        // Inner loop: operations on the current progression
         bool innerLoop = true;
         while (innerLoop) {
             std::cout << "\nChoose an operation:\n"
@@ -134,27 +122,22 @@ int main() {
                 std::cout << "Enter number of semitones to transpose (can be negative): ";
                 int semitones = readInteger();
                 currentProg = currentProg.transpose(semitones);
-                currentKey = transposeKey(currentKey, semitones);
+                currentKey = transpose(currentKey, semitones);
                 std::cout << "Progression transposed by " << semitones << " semitones.\n";
-                if (usingRomanInput) {
-                    // If originally roman, show chords.
-                    std::cout << "Resulting chords: " << currentProg << "\n";
-                } else {
-                    // If originally chords, show roman numeral analysis.
-                    std::cout << "Roman numeral analysis (key " << noteToString(currentKey) << "): " 
-                              << currentProg.toRomanNumerals(currentKey) << "\n";
-                }
+                std::cout << "Resulting chords: " << currentProg << "\n";
+                std::cout << "Roman numeral analysis (key " << noteToString(currentKey) << "): " 
+                          << currentProg.toRomanNumerals(currentKey) << "\n";
             } else if (choice == "c" || choice == "C") {
                 if (usingRomanInput) {
-                    // Conversion: roman numeral input converted to chords.
+                    // Conversion: roman numeral input converted to chords
                     std::cout << "Chord progression: " << currentProg << "\n";
                 } else {
-                    // Conversion: chord input converted to roman numeral analysis.
+                    // Conversion: chord input converted to roman numeral analysis
                     std::cout << "Roman numeral analysis (key " << noteToString(currentKey) << "): " 
                               << currentProg.toRomanNumerals(currentKey) << "\n";
                 }
             } else if (choice == "e" || choice == "E") {
-                // Exit inner loop to allow new progression input.
+                // Exit inner loop to allow new progression input
                 innerLoop = false;
                 break;
             } else {
@@ -162,7 +145,7 @@ int main() {
                 continue;
             }
 
-            // Ask how to continue.
+            // Ask how to continue
             std::cout << "\nWhat next?\n"
                       << "  (o) Use original progression\n"
                       << "  (c) Continue with current progression\n"
@@ -176,10 +159,10 @@ int main() {
                 currentKey = originalKey;
                 std::cout << "Reset to original progression.\n";
             } else if (nextChoice == "c" || nextChoice == "C") {
-                // Continue with the current (possibly transposed) progression.
+                // Continue with the current (possibly transposed) progression
                 continue;
             } else if (nextChoice == "n" || nextChoice == "N") {
-                // Break out to outer loop to input a new progression.
+                // Break out to outer loop to input a new progression
                 innerLoop = false;
             } else if (nextChoice == "q" || nextChoice == "Q") {
                 std::cout << "Exiting program.\n";
@@ -187,9 +170,8 @@ int main() {
             } else {
                 std::cout << "Invalid choice, continuing with current progression.\n";
             }
-        } // end inner loop
-    } // end outer loop
-
+        } 
+    }
     std::cout << "Goodbye!\n";
     return 0;
 }

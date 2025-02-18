@@ -32,6 +32,7 @@ enum Quality {
 
 // Conversion function declarations
 Note stringToNote(const std::string &s);
+Note transpose(Note initialNote, int transpose);
 std::string noteToString(Note note);
 std::string qualityToString(Quality quality);
 Quality stringToQuality(const std::string &s);
@@ -47,33 +48,29 @@ public:
     // Delete the default constructor to prevent uninitialized chords.
     Chord() = delete;
 
-    // Constructors
     Chord(Note rootNote);
     Chord(Note rootNote, Quality quality);
     Chord(Note rootNote, Quality quality, const std::string &extension);
 
-    // Getters
     Note getRootNote() const;
     Quality getQuality() const;
     std::string getExtension() const;
 
-    // Setters
     void setRootNote(Note note);
     void setQuality(Quality q);
     void setExtension(const std::string &ext);
 
-    // Transpose the chord by a given number of semitones.
+    // Transpose the chord by a given number of semitones
     Chord transpose(int semitones) const;
 
-    // Return the chord as a string (e.g., "C#m7", "Gdim", "Faug7", "Am").
+    // Return the chord as a string (e.g., "C#m7", "Gdim", "Faug7", "Am")
     std::string toString() const;
 
-    // Parse a chord from a string.
+    // Parse a chord from a string
     // Expected format: [Note][Quality][Extension]
     // Examples: "C#m7", "Gdim", "Faug7", "Am"
     static Chord fromString(const std::string &chordStr);
 
-    // Overload the stream insertion operator for printing.
     friend std::ostream &operator<<(std::ostream &os, const Chord &chord);
 };
 

@@ -36,35 +36,23 @@ This project uses CMake (version 3.14 or later) and requires a C++17 compiler.
    git clone https://github.com/yourusername/RNA-tool.git
    cd RNA-tool
    ```
-
-2. **Create a build directory and navigate into it:**
-
-   ```bash
-   mkdir build
-   cd build
-   ```
-
-3. **Run CMake configuration:**
+   
+2. **Compile the project:**
 
    ```bash
-   cmake ..
+   cmake -S . -B build
+   cmake --build build --config Release
    ```
 
-4. **Compile the project:**
-
-   ```bash
-   cmake --build .
-   ```
-
-5. **Run the executable:**
+3. **Run the executable:**
 
    On Linux/macOS:
    ```bash
-   ./RNA-tool
+   ./build/RNA-tool
    ```
    On Windows:
    ```bash
-   RNA-tool.exe
+   ./build/RNA-tool.exe
    ```
 
 ## Usage Instructions

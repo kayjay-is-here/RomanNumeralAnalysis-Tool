@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/RNA-tool_exe.dir/link.d "CMakeFiles/RNA-tool_exe.dir/source/main.cpp.o" "CMakeFiles/RNA-tool_lib.dir/source/lib.cpp.o" "CMakeFiles/RNA-tool_lib.dir/source/chord.cpp.o" "CMakeFiles/RNA-tool_lib.dir/source/chordProgression.cpp.o" -o RNA-tool  /usr/lib/libfmt.so.11.1.3

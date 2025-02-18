@@ -17,7 +17,7 @@ I made this project mostly because I didn't want to spend a lot of time analyzin
 - **Visual GUI:** A graphical user interface for a more intuitive experience.
 - **Extended Analysis Options:** Additional analysis modes for minor keys, modal progressions, etc.
 - **Improved Parsing:** Enhanced error detection and more flexible chord notation.
-- **Remove fmt requirement:** Frankly, it just came with my CMake template and I don't need it for anything
+- **Remove fmt requirement:** Frankly, it just came with my CMake template and I don't need it for anything.
 
 ## Compilation Instructions
 

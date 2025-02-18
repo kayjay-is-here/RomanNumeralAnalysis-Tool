@@ -17,7 +17,6 @@ include(cmake/variables.cmake)
 
 add_library(
     RNA-tool_lib OBJECT
-    source/lib.cpp
     source/chord.cpp
     source/chordProgression.cpp
 )
@@ -29,9 +28,6 @@ target_include_directories(
 )
 
 target_compile_features(RNA-tool_lib PUBLIC cxx_std_17)
-
-find_package(fmt REQUIRED)
-target_link_libraries(RNA-tool_lib PRIVATE fmt::fmt)
 
 SET(TARGET_H
     chord.hpp chordProgression.hpp)

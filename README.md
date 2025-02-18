@@ -27,7 +27,6 @@ This project uses CMake (version 3.14 or later) and requires a C++17 compiler.
 
 - [CMake](https://cmake.org/) (v3.14+)
 - A C++ compiler supporting C++17 (e.g., GCC, Clang, or MSVC)
-- [fmt](https://github.com/fmtlib/fmt) library installed on your system
 
 ### Build Steps
 
